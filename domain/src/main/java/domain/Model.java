@@ -28,7 +28,7 @@ public class Model {
 	@ManyToOne
 	@JoinColumn(name="brand_id")
 	private Brand brand;
-	@OneToMany(mappedBy = "version_id")
+	@OneToMany(mappedBy = "model")
 	private Collection<Version> versions;
 
 }

@@ -30,7 +30,7 @@ public class CustomerCar {
 	@OneToOne
 	@JoinColumn(name="driver_id")
 	private Driver driver;
-	@OneToMany(mappedBy = "maintenance_id")
+	@OneToMany(mappedBy = "customerCar")
 	private Collection<Maintenance> maintenances;
 
 }

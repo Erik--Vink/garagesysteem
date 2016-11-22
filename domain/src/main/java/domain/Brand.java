@@ -25,6 +25,6 @@ public class Brand {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long Id;
 	private String brandName;
-	@OneToMany(mappedBy = "model_id")
+	@OneToMany(mappedBy = "brand")
 	private Collection<Model> models;
 }

@@ -22,7 +22,7 @@ public class Driver {
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	@OneToOne(mappedBy = "customercar_id")
+	@OneToOne(mappedBy = "driver")
 	private CustomerCar customerCar;
 
 }
