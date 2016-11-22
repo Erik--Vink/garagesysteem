@@ -1,7 +1,6 @@
-package ejb;
+package repositories;
 
 import domain.Customer;
-import repositories.CustomerRepository;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

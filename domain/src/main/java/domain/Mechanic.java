@@ -22,7 +22,6 @@ public class Mechanic {
 	private long id;
 	private String firstName;
 	private String lastName;
-	@OneToMany(mappedBy = "status_id")
-	private Collection<Status> states;
-
+	@OneToMany(mappedBy = "mechanic")
+	private Collection<Status> statuses;
 }

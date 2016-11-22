@@ -21,7 +21,7 @@ import java.util.List;
 public class Maintenance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    private long id;
 	@ManyToOne
 	@JoinColumn(name="customercar_id")
 	private CustomerCar customerCar;
@@ -30,7 +30,7 @@ public class Maintenance {
 	private Collection<MaintenanceOptions> maintenanceOptions;
 	private String remark;
 	private boolean apk;
-	@OneToMany(mappedBy = "status_id")
-	private Collection<Status> states;
+	@OneToMany(mappedBy = "maintenance")
+	private Collection<Status> statuses;
 
 }

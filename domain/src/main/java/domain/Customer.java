@@ -25,7 +25,7 @@ public class Customer {
 	private long id;
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
-	@OneToMany(mappedBy = "customercar_id")
+	@OneToMany(mappedBy = "customer")
 	private Collection<CustomerCar> customerCars;
 	private String firstName;
 	private String lastName;

@@ -24,7 +24,7 @@ public class MaintenanceOptions {
 	private double price;
 	private int durationInMinutes;
 	private String tasks;
-	@ManyToMany(mappedBy = "maintenance_id")
+	@ManyToMany(mappedBy = "maintenanceOptions")
 	Collection<Maintenance> maintenances;
 
 }

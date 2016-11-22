@@ -25,7 +25,7 @@ public class Version {
 	@ManyToOne
 	@JoinColumn(name="model_id")
 	private Model model;
-	@OneToMany(mappedBy = "customercar_id")
+	@OneToMany(mappedBy = "version")
 	private Collection<CustomerCar> customerCars;
 
 }
