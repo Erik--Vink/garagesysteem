@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -25,11 +22,15 @@ public class Maintenance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@ManyToOne
+	@JoinColumn(name="customercar_id")
 	private CustomerCar customerCar;
 	private LocalDateTime startDate;
-	private List<MaintenanceOptions> maintenanceOptions;
+	@ManyToMany
+	private Collection<MaintenanceOptions> maintenanceOptions;
 	private String remark;
 	private boolean apk;
+	@OneToMany(mappedBy = "status_id")
 	private Collection<Status> states;
 
 }

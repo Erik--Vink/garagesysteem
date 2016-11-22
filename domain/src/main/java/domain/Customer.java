@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -21,6 +22,8 @@ public class Customer {
 	private long id;
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
+	@OneToMany(mappedBy = "customercar_id")
+	private Collection<CustomerCar> customerCars;
 	private String firstName;
 	private String lastName;
 	private String companyName;
