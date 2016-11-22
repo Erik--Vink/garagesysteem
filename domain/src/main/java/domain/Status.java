@@ -19,8 +19,12 @@ public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private long maintenanceId;
-	private long mechanicId;
+	@ManyToOne
+	@JoinColumn(name="maintenance_id")
+	private Maintenance maintenance;
+	@ManyToOne
+	@JoinColumn(name="mechanic_id")
+	private Mechanic mechanic;
 	@Enumerated(EnumType.STRING)
 	private StatusType statusType;
 

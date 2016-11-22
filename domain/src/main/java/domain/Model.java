@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -23,6 +25,10 @@ public class Model {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String modelName;
+	@ManyToOne
+	@JoinColumn(name="brand_id")
 	private Brand brand;
+	@OneToMany(mappedBy = "version_id")
+	private Collection<Version> versions;
 
 }

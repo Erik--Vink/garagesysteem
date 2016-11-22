@@ -23,6 +23,11 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.infosupport</groupId>
+            <artifactId>BsVoertuigEnKlantbeheer</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>FeGarageManagementSysteem</finalName>

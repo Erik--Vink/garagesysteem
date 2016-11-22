@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -15,12 +16,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "findAllCustomers", query = "SELECT e FROM Customer e")
+})
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
+	@OneToMany(mappedBy = "customercar_id")
+	private Collection<CustomerCar> customerCars;
 	private String firstName;
 	private String lastName;
 	private String companyName;

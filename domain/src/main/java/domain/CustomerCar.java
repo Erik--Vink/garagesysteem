@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -29,5 +30,7 @@ public class CustomerCar {
 	@OneToOne
 	@JoinColumn(name="driver_id")
 	private Driver driver;
+	@OneToMany(mappedBy = "maintenance_id")
+	private Collection<Maintenance> maintenances;
 
 }

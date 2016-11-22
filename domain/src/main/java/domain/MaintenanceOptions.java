@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -26,5 +24,7 @@ public class MaintenanceOptions {
 	private double price;
 	private int durationInMinutes;
 	private String tasks;
+	@ManyToMany(mappedBy = "maintenance_id")
+	Collection<Maintenance> maintenances;
 
 }
