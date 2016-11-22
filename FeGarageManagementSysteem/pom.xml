@@ -23,10 +23,6 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>eclipselink</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <finalName>FeGarageManagementSysteem</finalName>
