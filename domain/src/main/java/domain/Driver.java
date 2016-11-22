@@ -1,9 +1,14 @@
+package domain;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -13,19 +18,12 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Customer {
-
+public class Driver {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private CustomerType customerType;
 	private String firstName;
 	private String lastName;
-	private String companyName;
-	private String city;
-	private String postalCode;
-	private String streetAdress;
 	private String phoneNumber;
-	private String mailAdress;
-	private String accountNumber;
-	private String vatNumber;
 
 }
