@@ -27,7 +27,7 @@ public class CustomerCar {
 	@ManyToOne
 	@JoinColumn(name="version_id")
 	private Version version;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="customer_id")
 	private Customer customer;
 	@OneToOne

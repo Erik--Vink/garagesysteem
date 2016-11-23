@@ -19,7 +19,12 @@ public class CustomerRepository {
 
     public Customer save(Customer customer){
         try{
-            entityManager.persist(customer);
+            if(customer.getId() != 0){
+                entityManager.merge(customer);
+            }
+            else{
+                entityManager.persist(customer);
+            }
             return customer;
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
