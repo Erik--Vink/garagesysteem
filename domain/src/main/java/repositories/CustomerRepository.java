@@ -20,7 +20,6 @@ public class CustomerRepository {
     public Customer save(Customer customer){
         try{
             entityManager.persist(customer);
-            entityManager.flush();
             return customer;
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
