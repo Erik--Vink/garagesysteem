@@ -1,20 +1,18 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

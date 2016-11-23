@@ -1,9 +1,6 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -11,11 +8,12 @@ import java.util.Collection;
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 @NamedQueries({
 		@NamedQuery(name = "findAllCustomers", query = "SELECT e FROM Customer e")
 })
@@ -25,8 +23,8 @@ public class Customer {
 	private long id;
 	@Enumerated(EnumType.STRING)
 	private CustomerType customerType;
-//	@OneToMany(mappedBy = "customer")
-//	private Collection<CustomerCar> customerCars;
+	@OneToMany(mappedBy = "customer")
+	private Collection<CustomerCar> customerCars;
 	private String firstName;
 	private String lastName;
 	private String companyName;
