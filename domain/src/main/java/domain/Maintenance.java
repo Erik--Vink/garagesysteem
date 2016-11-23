@@ -1,9 +1,6 @@
 package domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,11 +9,12 @@ import java.util.Collection;
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
  */
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Getter
+@Setter
 @NamedQueries({
 		@NamedQuery(name = "findAllMaintenances", query = "SELECT e FROM Maintenance e")
 })
