@@ -16,7 +16,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Builder
 @Entity
-public class MaintenanceOptions {
+public class MaintenanceOption {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
