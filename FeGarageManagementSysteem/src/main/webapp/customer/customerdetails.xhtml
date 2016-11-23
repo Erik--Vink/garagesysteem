@@ -19,9 +19,9 @@
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
-                                    <label for="firstName" class="col-sm-4">Customer type</label>
+                                    <label for="customerType" class="col-sm-4">Customer type</label>
                                     <div class="col-sm-8">
-                                        <h:selectOneMenu value="#{CustomerEjb.customer.customerType}" styleClass="form-control">
+                                        <h:selectOneMenu value="#{CustomerEjb.customer.customerType}" styleClass="form-control" id="customerType">
                                             <c:forEach items="${CustomerEjb.customerTypes}" var="type">
                                                 <f:selectItem itemValue="${type}" itemLabel="${type}"/>
                                             </c:forEach>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <h:commandButton type="submit"  value="Save" action="#{CustomerEjb.save(CustomerEjb.customer)}" styleClass="btn btn-success"/>
+                                <h:commandButton type="submit"  value="Save" action="#{CustomerEjb.save()}" styleClass="btn btn-success"/>
                             </div>
                         </div>
                     </div>

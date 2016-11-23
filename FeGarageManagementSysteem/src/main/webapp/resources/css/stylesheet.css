@@ -23,4 +23,8 @@
     color:black;
 }
 
+/*Table*/
+.table-middle-align td{
+    vertical-align: middle !important;
+}
 

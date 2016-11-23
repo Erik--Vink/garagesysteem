@@ -1,13 +1,12 @@
 package managedBeans;
 
-import domain.Brand;
 import domain.Customer;
 import domain.CustomerType;
-import repositories.BrandRepository;
 import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +24,14 @@ public class CustomerEjb {
     CustomerRepository customerRepository;
 
     public CustomerEjb(){
-        this.customer = new Customer();
+        Customer customer = (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
+        if(customer == null){
+            this.customer = new Customer();
+        }
+        else{
+            this.customer = customer;
+        }
+        System.out.println(customer);
     }
 
     public Customer getCustomer(){
@@ -36,15 +42,14 @@ public class CustomerEjb {
         return Arrays.asList(CustomerType.values());
     }
 
-    public String save(Customer customer){
+    public String save(){
         try {
-            customerRepository.save(customer);
-            this.customer = null;
+            customerRepository.save(this.customer);
+            this.customer = new Customer();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "customerlist";
-
+        return "/index?faces-redirect=true";
     }
 }

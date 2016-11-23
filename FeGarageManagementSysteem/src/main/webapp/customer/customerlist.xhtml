@@ -3,45 +3,46 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
             <h:form>
                 <div class="container">
                     <div class="col-sm-12">
-                        <h1>Customerlist</h1>
-                        <!--<h:dataTable value="#{orders.orders}" var="order" styleClass="table table-striped">-->
-                            <!--<h:column>-->
-                                <!--<f:facet name="header">-->
-                                    <!--Name-->
-                                <!--</f:facet>-->
-                                <!--<h:outputText value="#{order.customer.name}"/>-->
-                            <!--</h:column>-->
-                            <!--<h:column>-->
-                                <!--<f:facet name="header">Price</f:facet>-->
-                                <!--<h:outputText value="€ #{order.totalPrice}"/>-->
-                            <!--</h:column>-->
-                            <!--<h:column headerClass="column-75">-->
-                                <!--<details>-->
-                                    <!--<summary>Items</summary>-->
-                                    <!--<h:dataTable value="#{order.orderItems}" var="orderItem" styleClass="table">-->
-                                        <!--<h:column>-->
-                                            <!--<f:facet name="header">Pizza</f:facet>-->
-                                            <!--<h:outputText value="#{orderItem.pizza.name}"/>-->
-                                        <!--</h:column>-->
-                                        <!--<h:column>-->
-                                            <!--<f:facet name="header">Quantity</f:facet>-->
-                                            <!--<h:outputText value="#{orderItem.quantity}"/>-->
-                                        <!--</h:column>-->
-                                    <!--</h:dataTable>-->
-                                <!--</details>-->
-                            <!--</h:column>-->
-                            <!--<h:column>-->
-                                <!--<f:facet name="header"/>-->
-                                <!--&lt;!&ndash;<h:commandButton action="#{cart.addblabla(pizza.pizzaId, pizza)}" value="" styleClass="btn btn-success"/>&ndash;&gt;-->
-                            <!--</h:column>-->
-                        <!--</h:dataTable>-->
+                        <h1>Klanten</h1>
+                        <h:dataTable value="#{CustomerListEjb.customers}" var="item" styleClass="table table-striped table-middle-align">
+                            <h:column>
+                                <f:facet name="header">Klant type</f:facet>
+                                <h:outputText value="#{item.customerType}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Voornaam</f:facet>
+                                <h:outputText value="#{item.firstName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Achternaam</f:facet>
+                                <h:outputText value="#{item.lastName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Bedrijfsnaam</f:facet>
+                                <h:outputText value="#{item.companyName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Email</f:facet>
+                                <h:outputText value="#{item.mailAdress}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Telefoon</f:facet>
+                                <h:outputText value="#{item.phoneNumber}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <h:commandLink action="#{CustomerListEjb.goToDetail(item)}">
+                                    <button class="btn btn-warning"><span class="fa fa-pencil"></span></button>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
                     </div>
                 </div>
             </h:form>
