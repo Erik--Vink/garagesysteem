@@ -38,9 +38,10 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header"></f:facet>
-                                <h:commandLink action="#{CustomerListEjb.goToDetail(item)}">
-                                    <button class="btn btn-warning"><span class="fa fa-pencil"></span></button>
-                                </h:commandLink>
+                                <h:link outcome="customerdetails" styleClass="btn btn-warning">
+                                    <f:param name="customerId" value="#{item.id}" />
+                                    <span class="fa fa-pencil"></span>
+                                </h:link>
                             </h:column>
                         </h:dataTable>
                     </div>
@@ -48,32 +49,6 @@
             </h:form>
         </ui:define>
     </ui:composition>
-
-
-
-
-        <!--<h1>Convert your amount of euros to the value of your choice.</h1>-->
-            <!--<h:inputText id="amount"-->
-                         <!--value="#{valutaConverter.value}"-->
-                         <!--required="true"-->
-                         <!--requiredMessage="Error: Amount is required."-->
-                         <!--maxlength="25" />-->
-            <!--<p></p>-->
-            <!--<h:selectOneMenu value="#{valutaConverter.valuta}">-->
-                <!--<c:forEach items="${valutaConverter.valutaList.valutas}" var="valuta">-->
-                    <!--<f:selectItem itemValue="${valuta.name}" itemLabel="${valuta.name}"></f:selectItem>-->
-                <!--</c:forEach>-->
-                <!--&lt;!&ndash;<f:selectItem itemValue="yen" itemLabel="Yen"></f:selectItem>&ndash;&gt;-->
-            <!--</h:selectOneMenu>-->
-            <!--<p></p>-->
-            <!--<h:commandButton id="submit" value="Submit" action="response" />-->
-            <!--<h:commandButton id="reset" value="Reset" type="reset" />-->
-        <!--<div class="messagecolor">-->
-            <!--<h:messages showSummary="true"-->
-                        <!--showDetail="false"-->
-                        <!--errorStyle="color: #d20005"-->
-                        <!--infoStyle="color: blue"/>-->
-        <!--</div>-->
 </h:body>
 </html>
 

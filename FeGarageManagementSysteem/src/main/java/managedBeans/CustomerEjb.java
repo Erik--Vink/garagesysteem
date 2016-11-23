@@ -24,14 +24,17 @@ public class CustomerEjb {
     CustomerRepository customerRepository;
 
     public CustomerEjb(){
-        Customer customer = (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
-        if(customer == null){
-            this.customer = new Customer();
+        customer = new Customer();
+    }
+
+    public void loadExistingCustomer(){
+        if(this.customer.getId() != 0){
+            try {
+                this.customer = customerRepository.getById(this.customer.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        else{
-            this.customer = customer;
-        }
-        System.out.println(customer);
     }
 
     public Customer getCustomer(){
@@ -44,6 +47,7 @@ public class CustomerEjb {
 
     public String save(){
         try {
+            System.out.println(this.customer);
             customerRepository.save(this.customer);
             this.customer = new Customer();
 

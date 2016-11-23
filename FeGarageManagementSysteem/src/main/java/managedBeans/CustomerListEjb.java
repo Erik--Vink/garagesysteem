@@ -29,10 +29,4 @@ public class CustomerListEjb {
         }
         return null;
     }
-
-    public String goToDetail(Customer customer){
-        System.out.println(customer);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("customer", customer);
-        return "customerdetails?faces-redirect=true";
-    }
 }
