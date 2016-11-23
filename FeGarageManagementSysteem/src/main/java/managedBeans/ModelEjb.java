@@ -6,10 +6,8 @@ import repositories.BrandRepository;
 import repositories.ModelRepository;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +43,7 @@ public class ModelEjb {
 
     public String save(){
         try {
-            modelRepository.save(model);
+            modelRepository.saveOrUpdate(model);
             model = new Model();
         } catch (Exception e) {
             e.printStackTrace();

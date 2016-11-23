@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Status;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,13 +19,17 @@ public class StatusRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Status save(Status status) throws Exception {
-        try {
-            entityManager.persist(status);
+    public Status saveOrUpdate(Status status) {
+        try{
+            if(status.getId() != 0){
+                entityManager.merge(status);
+            }
+            else{
+                entityManager.persist(status);
+            }
             return status;
         } catch (Exception ex) {
-
-            throw new Exception("Could not create or update " + ex);
+            throw new EJBException(ex.getMessage());
         }
     }
 

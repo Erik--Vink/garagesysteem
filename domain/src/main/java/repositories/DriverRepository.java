@@ -16,10 +16,14 @@ public class DriverRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Driver save(Driver driver){
+    public Driver saveOrUpdate(Driver driver) {
         try{
-            entityManager.persist(driver);
-            entityManager.flush();
+            if(driver.getId() != 0){
+                entityManager.merge(driver);
+            }
+            else{
+                entityManager.persist(driver);
+            }
             return driver;
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());

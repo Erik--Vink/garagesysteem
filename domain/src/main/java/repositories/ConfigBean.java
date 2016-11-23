@@ -40,7 +40,7 @@ public class ConfigBean {
 
 
         // particulier
-        Customer privateCustomer = customerRepository.save(Customer.builder()
+        Customer privateCustomer = customerRepository.saveOrUpdate(Customer.builder()
                 .accountNumber("0123456789")
                 .city("Heerlen")
                 .customerType(CustomerType.PRIVATE)
@@ -53,7 +53,7 @@ public class ConfigBean {
                 .build());
 
         // bedrijf
-        Customer company = customerRepository.save(Customer.builder()
+        Customer company = customerRepository.saveOrUpdate(Customer.builder()
                 .accountNumber("7894561230")
                 .city("Rotterdam")
                 .companyName("GitGood")
@@ -65,7 +65,7 @@ public class ConfigBean {
                 .vatNumber("NL001234567B01")
                 .build());
 
-        MaintenanceOption maintenanceOption2 = maintenanceOptionRepository.save(MaintenanceOption.builder()
+        MaintenanceOption maintenanceOption2 = maintenanceOptionRepository.saveOrUpdate(MaintenanceOption.builder()
                 .description("Grote Beurt")
                 .durationInMinutes(120)
                 .price(100.00)
@@ -76,69 +76,69 @@ public class ConfigBean {
         maintenanceOptions.add(maintenanceOption2);
 
 
-        Brand opel = brandRepository.save(Brand.builder()
+        Brand opel = brandRepository.saveOrUpdate(Brand.builder()
                 .brandName("Opel")
                 .build());
 
-        Brand bmw = brandRepository.save(Brand.builder()
+        Brand bmw = brandRepository.saveOrUpdate(Brand.builder()
                 .brandName("BMW")
                 .build());
 
 
-        Model corsa = modelRepository.save(Model.builder()
+        Model corsa = modelRepository.saveOrUpdate(Model.builder()
                 .modelName("Corsa")
                 .brand(opel)
                 .build());
 
-        Model threeSeries = modelRepository.save(Model.builder()
+        Model threeSeries = modelRepository.saveOrUpdate(Model.builder()
                 .modelName("3 series")
                 .brand(bmw)
                 .build());
 
-        Model zafira = modelRepository.save(Model.builder()
+        Model zafira = modelRepository.saveOrUpdate(Model.builder()
                 .modelName("Zafira")
                 .brand(opel)
                 .build());
 
 
-        Version opelSwing = versionRepository.save(Version.builder()
+        Version opelSwing = versionRepository.saveOrUpdate(Version.builder()
                 .motor("1.8 Diesel")
                 .versionName("Swing")
                 .model(corsa)
                 .build());
 
-        Version opelZafira = versionRepository.save(Version.builder()
+        Version opelZafira = versionRepository.saveOrUpdate(Version.builder()
                 .motor("1.6 Benzine")
                 .versionName("Tourer C")
                 .model(zafira)
                 .build());
 
-        Version bmw328i = versionRepository.save(Version.builder()
+        Version bmw328i = versionRepository.saveOrUpdate(Version.builder()
                 .motor("2.0 Benzine")
                 .versionName("328i")
                 .model(threeSeries)
                 .build());
 
 
-        CustomerCar customerCar = customerCarRepository.save(CustomerCar.builder()
+        CustomerCar customerCar = customerCarRepository.saveOrUpdate(CustomerCar.builder()
                 .numberPlate("9-XXX-4")
                 .customer(privateCustomer)
                 .version(opelSwing)
                 .build());
 
-        Driver companyDriver = driverRepository.save(Driver.builder()
+        Driver companyDriver = driverRepository.saveOrUpdate(Driver.builder()
                 .firstName("Jan")
                 .lastName("Jansen")
                 .phoneNumber("9873216540")
                 .build());
 
-        CustomerCar driverCar = customerCarRepository.save(CustomerCar.builder()
+        CustomerCar driverCar = customerCarRepository.saveOrUpdate(CustomerCar.builder()
                 .numberPlate("19-GR-LL")
                 .driver(companyDriver)
                 .version(opelZafira)
                 .build());
 
-        Maintenance maintenanceCustomer = maintenanceRepository.save(Maintenance.builder()
+        Maintenance maintenanceCustomer = maintenanceRepository.saveOrUpdate(Maintenance.builder()
                 .apk(false)
                 .remark("None")
                 .startDate(LocalDateTime.now())
@@ -149,7 +149,7 @@ public class ConfigBean {
         Collection<Maintenance> maintenances = new ArrayList<>();
         maintenances.add(maintenanceCustomer);
 
-        MaintenanceOption maintenanceOption = maintenanceOptionRepository.save(MaintenanceOption.builder()
+        MaintenanceOption maintenanceOption = maintenanceOptionRepository.saveOrUpdate(MaintenanceOption.builder()
                 .description("Kleine Beurt")
                 .durationInMinutes(60)
                 .price(50.00)
@@ -158,12 +158,12 @@ public class ConfigBean {
                 .build());
 
 
-        Mechanic mechanic = mechanicRepository.save(Mechanic.builder()
+        Mechanic mechanic = mechanicRepository.saveOrUpdate(Mechanic.builder()
                 .firstName("Yus")
                 .lastName("Yusuf")
                 .build());
 
-        Status statusMaintanance = statusRepository.save(Status.builder()
+        Status statusMaintanance = statusRepository.saveOrUpdate(Status.builder()
                 .statusType(StatusType.AFSPRAAK)
                 .maintenance(maintenanceCustomer)
                 .mechanic(mechanic)

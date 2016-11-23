@@ -17,7 +17,7 @@ public class CustomerRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Customer save(Customer customer){
+    public Customer saveOrUpdate(Customer customer) {
         try{
             if(customer.getId() != 0){
                 entityManager.merge(customer);

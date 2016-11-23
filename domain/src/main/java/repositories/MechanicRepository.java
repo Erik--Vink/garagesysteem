@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Mechanic;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,13 +19,17 @@ public class MechanicRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Mechanic save(Mechanic mechanic) throws Exception {
-        try {
-            entityManager.persist(mechanic);
+    public Mechanic saveOrUpdate(Mechanic mechanic) {
+        try{
+            if(mechanic.getId() != 0){
+                entityManager.merge(mechanic);
+            }
+            else{
+                entityManager.persist(mechanic);
+            }
             return mechanic;
         } catch (Exception ex) {
-
-            throw new Exception("Could not create or update " + ex);
+            throw new EJBException(ex.getMessage());
         }
     }
 

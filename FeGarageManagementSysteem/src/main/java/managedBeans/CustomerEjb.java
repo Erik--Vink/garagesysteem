@@ -6,7 +6,6 @@ import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +47,7 @@ public class CustomerEjb {
     public String save(){
         try {
             System.out.println(this.customer);
-            customerRepository.save(this.customer);
+            customerRepository.saveOrUpdate(this.customer);
             this.customer = new Customer();
 
         } catch (Exception e) {

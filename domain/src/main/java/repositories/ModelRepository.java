@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Model;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,13 +18,17 @@ public class ModelRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Model save(Model model) throws Exception {
-        try {
-            entityManager.persist(model);
+    public Model saveOrUpdate(Model model) throws Exception {
+        try{
+            if(model.getId() != 0){
+                entityManager.merge(model);
+            }
+            else{
+                entityManager.persist(model);
+            }
             return model;
         } catch (Exception ex) {
-
-            throw new Exception("Could not create or update " + ex);
+            throw new EJBException(ex.getMessage());
         }
     }
 

@@ -4,11 +4,8 @@ import domain.Brand;
 import repositories.BrandRepository;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by Kenzo Dominicus on 23-11-2016.
@@ -31,7 +28,7 @@ public class BrandEjb {
 
     public String save(){
         try {
-            brandRepository.save(brand);
+            brandRepository.saveOrUpdate(brand);
             brand = new Brand();
         } catch (Exception e) {
             e.printStackTrace();

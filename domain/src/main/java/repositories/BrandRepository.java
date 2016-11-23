@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Brand;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,13 +18,17 @@ public class BrandRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Brand save(Brand brand) throws Exception {
-        try {
-            entityManager.persist(brand);
+    public Brand saveOrUpdate(Brand brand) {
+        try{
+            if(brand.getId() != 0){
+                entityManager.merge(brand);
+            }
+            else{
+                entityManager.persist(brand);
+            }
             return brand;
         } catch (Exception ex) {
-
-            throw new Exception("Could not create or update " + ex);
+            throw new EJBException(ex.getMessage());
         }
     }
 

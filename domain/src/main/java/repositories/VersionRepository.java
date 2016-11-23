@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Version;
 
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,13 +18,17 @@ public class VersionRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Version save(Version version) throws Exception {
-        try {
-            entityManager.persist(version);
+    public Version saveOrUpdate(Version version) {
+        try{
+            if(version.getId() != 0){
+                entityManager.merge(version);
+            }
+            else{
+                entityManager.persist(version);
+            }
             return version;
         } catch (Exception ex) {
-
-            throw new Exception("Could not create or update " + ex);
+            throw new EJBException(ex.getMessage());
         }
     }
 

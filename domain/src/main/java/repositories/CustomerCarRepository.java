@@ -17,12 +17,16 @@ public class CustomerCarRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public CustomerCar save(CustomerCar customerCar){
+    public CustomerCar saveOrUpdate(CustomerCar customerCar) {
         try{
-            entityManager.persist(customerCar);
-            entityManager.flush();
+            if(customerCar.getId() != 0){
+                entityManager.merge(customerCar);
+            }
+            else{
+                entityManager.persist(customerCar);
+            }
             return customerCar;
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
         }
     }

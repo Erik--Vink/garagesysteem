@@ -17,10 +17,14 @@ public class MaintenanceRepository {
     @PersistenceContext
     EntityManager entityManager;
 
-    public Maintenance save(Maintenance maintenance){
-        try {
-            entityManager.persist(maintenance);
-            entityManager.flush();
+    public Maintenance saveOrUpdate(Maintenance maintenance) {
+        try{
+            if(maintenance.getId() != 0){
+                entityManager.merge(maintenance);
+            }
+            else{
+                entityManager.persist(maintenance);
+            }
             return maintenance;
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());

@@ -16,10 +16,15 @@ public class MaintenanceOptionRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-    public MaintenanceOption save(MaintenanceOption maintenanceOption){
+
+    public MaintenanceOption saveOrUpdate(MaintenanceOption maintenanceOption) {
         try{
-            entityManager.persist(maintenanceOption);
-            entityManager.flush();
+            if(maintenanceOption.getId() != 0){
+                entityManager.merge(maintenanceOption);
+            }
+            else{
+                entityManager.persist(maintenanceOption);
+            }
             return maintenanceOption;
         } catch (Exception ex) {
             throw new EJBException(ex.getMessage());
