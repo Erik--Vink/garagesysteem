@@ -2,6 +2,7 @@ package repositories;
 
 import domain.Version;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by dewi on 22.11.16.
  */
+@Stateless
 public class VersionRepository {
 
     @PersistenceContext
