@@ -16,6 +16,9 @@ import java.util.Collection;
 @NoArgsConstructor
 @Builder
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "findAllMechanics", query = "SELECT e FROM Mechanic e")
+})
 public class Mechanic {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

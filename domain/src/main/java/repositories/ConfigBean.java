@@ -2,11 +2,13 @@ package repositories;
 
 import domain.*;
 
-import javax.annotation.Generated;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Singleton
 @Startup
@@ -20,12 +22,25 @@ public class ConfigBean {
     private BrandRepository brandRepository;
     @EJB
     private ModelRepository modelRepository;
+    @EJB
+    private CustomerCarRepository customerCarRepository;
+    @EJB
+    private MaintenanceOptionRepository maintenanceOptionRepository;
+    @EJB
+    private MaintenanceRepository maintenanceRepository;
+    @EJB
+    private DriverRepository driverRepository;
+    @EJB
+    private MechanicRepository mechanicRepository;
+    @EJB
+    private StatusRepository statusRepository;
 
     @PostConstruct
     public void createData() throws Exception {
 
+
         // particulier
-        Customer customer1 = customerRepository.save(Customer.builder()
+        Customer privateCustomer = customerRepository.save(Customer.builder()
                 .accountNumber("0123456789")
                 .city("Heerlen")
                 .customerType(CustomerType.PRIVATE)
@@ -38,7 +53,7 @@ public class ConfigBean {
                 .build());
 
         // bedrijf
-        Customer customer2 = customerRepository.save(Customer.builder()
+        Customer company = customerRepository.save(Customer.builder()
                 .accountNumber("7894561230")
                 .city("Rotterdam")
                 .companyName("GitGood")
@@ -50,37 +65,108 @@ public class ConfigBean {
                 .vatNumber("NL001234567B01")
                 .build());
 
+        MaintenanceOption maintenanceOption2 = maintenanceOptionRepository.save(MaintenanceOption.builder()
+                .description("Grote Beurt")
+                .durationInMinutes(120)
+                .price(100.00)
+                .tasks("Remmen vervangen, Filters vervangen")
+                .build());
 
-        Brand brand = brandRepository.save(Brand.builder()
+        Collection<MaintenanceOption> maintenanceOptions = new ArrayList<>();
+        maintenanceOptions.add(maintenanceOption2);
+
+
+        Brand opel = brandRepository.save(Brand.builder()
                 .brandName("Opel")
                 .build());
 
-        Brand brand1 = brandRepository.save(Brand.builder()
+        Brand bmw = brandRepository.save(Brand.builder()
                 .brandName("BMW")
                 .build());
 
 
-        Model model = modelRepository.save(Model.builder()
+        Model corsa = modelRepository.save(Model.builder()
                 .modelName("Corsa")
-                .brand(brand)
+                .brand(opel)
                 .build());
 
-        Model model1 = modelRepository.save(Model.builder()
+        Model threeSeries = modelRepository.save(Model.builder()
                 .modelName("3 series")
-                .brand(brand1)
+                .brand(bmw)
+                .build());
+
+        Model zafira = modelRepository.save(Model.builder()
+                .modelName("Zafira")
+                .brand(opel)
                 .build());
 
 
-        Version version = versionRepository.save(Version.builder()
+        Version opelSwing = versionRepository.save(Version.builder()
                 .motor("1.8 Diesel")
                 .versionName("Swing")
-                .model(model)
+                .model(corsa)
                 .build());
 
-        Version version1 = versionRepository.save(Version.builder()
+        Version opelZafira = versionRepository.save(Version.builder()
+                .motor("1.6 Benzine")
+                .versionName("Tourer C")
+                .model(zafira)
+                .build());
+
+        Version bmw328i = versionRepository.save(Version.builder()
                 .motor("2.0 Benzine")
                 .versionName("328i")
-                .model(model1)
+                .model(threeSeries)
+                .build());
+
+
+        CustomerCar customerCar = customerCarRepository.save(CustomerCar.builder()
+                .numberPlate("9-XXX-4")
+                .customer(privateCustomer)
+                .version(opelSwing)
+                .build());
+
+        Driver companyDriver = driverRepository.save(Driver.builder()
+                .firstName("Jan")
+                .lastName("Jansen")
+                .phoneNumber("9873216540")
+                .build());
+
+        CustomerCar driverCar = customerCarRepository.save(CustomerCar.builder()
+                .numberPlate("19-GR-LL")
+                .driver(companyDriver)
+                .version(opelZafira)
+                .build());
+
+        Maintenance maintenanceCustomer = maintenanceRepository.save(Maintenance.builder()
+                .apk(false)
+                .remark("None")
+                .startDate(LocalDateTime.now())
+                .customerCar(customerCar)
+                .maintenanceOptions(maintenanceOptions)
+                .build());
+
+        Collection<Maintenance> maintenances = new ArrayList<>();
+        maintenances.add(maintenanceCustomer);
+
+        MaintenanceOption maintenanceOption = maintenanceOptionRepository.save(MaintenanceOption.builder()
+                .description("Kleine Beurt")
+                .durationInMinutes(60)
+                .price(50.00)
+                .tasks("Olie verversen, Filters vervangen")
+                .maintenances(maintenances)
+                .build());
+
+
+        Mechanic mechanic = mechanicRepository.save(Mechanic.builder()
+                .firstName("Yus")
+                .lastName("Yusuf")
+                .build());
+
+        Status statusMaintanance = statusRepository.save(Status.builder()
+                .statusType(StatusType.AFSPRAAK)
+                .maintenance(maintenanceCustomer)
+                .mechanic(mechanic)
                 .build());
 
     }
