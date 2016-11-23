@@ -16,7 +16,10 @@ import java.util.Collection;
 @NoArgsConstructor
 @Builder
 @Entity
-public class MaintenanceOptions {
+@NamedQueries({
+		@NamedQuery(name = "findAllMaintenanceOptions", query = "SELECT e FROM MaintenanceOption e")
+})
+public class MaintenanceOption {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;

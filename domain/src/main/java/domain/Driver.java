@@ -15,6 +15,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "findAllDrivers", query = "SELECT e FROM Driver e")
+})
 public class Driver {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

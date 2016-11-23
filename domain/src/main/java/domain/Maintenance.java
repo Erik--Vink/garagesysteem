@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -18,6 +17,9 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "findAllMaintenances", query = "SELECT e FROM Maintenance e")
+})
 public class Maintenance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +29,7 @@ public class Maintenance {
 	private CustomerCar customerCar;
 	private LocalDateTime startDate;
 	@ManyToMany
-	private Collection<MaintenanceOptions> maintenanceOptions;
+	private Collection<MaintenanceOption> maintenanceOptions;
 	private String remark;
 	private boolean apk;
 	@OneToMany(mappedBy = "maintenance")
