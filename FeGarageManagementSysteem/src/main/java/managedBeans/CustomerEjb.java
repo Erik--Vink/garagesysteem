@@ -1,9 +1,7 @@
 package managedBeans;
 
-import domain.Brand;
 import domain.Customer;
 import domain.CustomerType;
-import repositories.BrandRepository;
 import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
@@ -32,19 +30,27 @@ public class CustomerEjb {
         return this.customer;
     }
 
+    public List<Customer> getCustomers(){
+        try {
+            return customerRepository.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<CustomerType> getCustomerTypes(){
         return Arrays.asList(CustomerType.values());
     }
 
-    public String save(Customer customer){
+    public String save(){
         try {
-            customerRepository.save(customer);
-            this.customer = null;
+            customerRepository.save(this.customer);
+            this.customer = new Customer();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "customerlist";
-
+        return "/index?faces-redirect=true";
     }
 }
