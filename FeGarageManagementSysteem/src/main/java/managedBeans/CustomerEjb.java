@@ -6,6 +6,7 @@ import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.List;
@@ -23,20 +24,18 @@ public class CustomerEjb {
     CustomerRepository customerRepository;
 
     public CustomerEjb(){
-        this.customer = new Customer();
+        Customer customer = (Customer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("customer");
+        if(customer == null){
+            this.customer = new Customer();
+        }
+        else{
+            this.customer = customer;
+        }
+        System.out.println(customer);
     }
 
     public Customer getCustomer(){
         return this.customer;
-    }
-
-    public List<Customer> getCustomers(){
-        try {
-            return customerRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public List<CustomerType> getCustomerTypes(){
