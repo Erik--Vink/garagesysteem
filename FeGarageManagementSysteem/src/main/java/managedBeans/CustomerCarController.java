@@ -105,7 +105,10 @@ public class CustomerCarController {
         try {
             customerCar.setVersion(versionRepository.getById(versionId));
             customerCar.setCustomer(customerRepository.getById(customerId));
-            customerCar.setDriver(driverRepository.getById(driverId));
+            if(driverId != 0){
+                customerCar.setDriver(driverRepository.getById(driverId));
+            }
+
 
             customerCarRepository.saveOrUpdate(customerCar);
             customerCar = new CustomerCar();
