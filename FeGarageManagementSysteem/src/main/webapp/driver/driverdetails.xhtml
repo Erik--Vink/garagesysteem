@@ -14,33 +14,39 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h1>Model details</h1>
+                                <h1>Bestuurder details</h1>
                             </div>
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
-                                    <label for="modelName" class="col-sm-4">Modelnaam</label>
+                                    <label for="firstName" class="col-sm-4">Voornaam</label>
                                     <div class="col-sm-8">
-                                        <h:inputText id="modelName" styleClass="form-control" value="#{ModelEjb.model.modelName}"/>
+                                        <h:inputText id="firstName" styleClass="form-control" value="#{DriverEjb.driver.firstName}"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
-                                    <label for="Brand" class="col-sm-4">Merk</label>
+                                    <label for="lastName" class="col-sm-4">Achternaam</label>
                                     <div class="col-sm-8">
-                                        <h:selectOneMenu value="#{ModelEjb.brandId}" styleClass="form-control" id="Brand">
-                                            <f:selectItems value="#{ModelEjb.brands}" var="brand" itemValue="#{brand.id}" itemLabel="#{brand.brandName}"/>
-                                        </h:selectOneMenu>
+                                        <h:inputText id="lastName" styleClass="form-control" value="#{DriverEjb.driver.lastName}"/>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="phoneNumber" class="col-sm-4">Telefoonnummer</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="phoneNumber" styleClass="form-control" value="#{DriverEjb.driver.phoneNumber}"/>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h:commandButton type="submit"  value="Save" action="#{ModelEjb.save()}" styleClass="btn btn-success"/>
+                                    <h:commandButton type="submit"  value="Save" action="#{DriverEjb.save()}" styleClass="btn btn-success"/>
                                 </div>
                             </div>
                         </div>
