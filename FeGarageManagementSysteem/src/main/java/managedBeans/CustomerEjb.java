@@ -22,12 +22,12 @@ public class CustomerEjb {
     @EJB
     CustomerRepository customerRepository;
 
-    public CustomerEjb(){
+    public CustomerEjb() {
         customer = new Customer();
     }
 
-    public void loadExistingCustomer(){
-        if(this.customer.getId() != 0){
+    public void loadExistingCustomer() {
+        if(this.customer.getId() != 0) {
             try {
                 this.customer = customerRepository.getById(this.customer.getId());
             } catch (Exception e) {

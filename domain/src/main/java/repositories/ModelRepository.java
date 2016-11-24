@@ -18,7 +18,7 @@ public class ModelRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Model saveOrUpdate(Model model) throws Exception {
+    public Model saveOrUpdate(Model model) {
         try{
             if(model.getId() != 0){
                 entityManager.merge(model);
