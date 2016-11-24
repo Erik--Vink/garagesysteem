@@ -1,5 +1,6 @@
 package domain;
 
+import interceptor.MyInterceptorBinding;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@MyInterceptorBinding
 public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

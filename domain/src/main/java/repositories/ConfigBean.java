@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -35,9 +34,11 @@ public class ConfigBean {
     private MechanicRepository mechanicRepository;
     @EJB
     private StatusRepository statusRepository;
+    @EJB
+    private DbLoggerRepository dbLoggerRepository;
 
     @PostConstruct
-    public void createData() {
+    public void createData() throws Exception {
 
 
         // particulier
@@ -168,6 +169,13 @@ public class ConfigBean {
                 .statusType(StatusType.AFSPRAAK)
                 .maintenance(maintenanceCustomer)
                 .mechanic(mechanic)
+                .build());
+
+        Exception exception = new Exception("Hello");
+
+        DbLogger dbLogger = dbLoggerRepository.logException(DbLogger.builder()
+                .exceptionType(exception.toString())
+                .exceptionMessage(exception.getMessage())
                 .build());
 
     }

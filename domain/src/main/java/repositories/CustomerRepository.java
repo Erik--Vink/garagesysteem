@@ -1,6 +1,7 @@
 package repositories;
 
 import domain.Customer;
+import interceptor.MyInterceptorBinding;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by Erik on 22-11-2016.
  */
 @Stateless
+@MyInterceptorBinding
 public class CustomerRepository {
 
     @PersistenceContext

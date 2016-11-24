@@ -2,11 +2,13 @@ package managedBeans;
 
 import domain.Customer;
 import domain.CustomerType;
+import interceptor.TestInterceptor;
 import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Named(value = "customerController")
 @Stateless
+@Interceptors(TestInterceptor.class)
 public class CustomerController {
 
     private Customer currentCustomer;
@@ -42,13 +45,8 @@ public class CustomerController {
         return this.currentCustomer;
     }
 
-    public List<Customer> getCustomers(){
-        try {
-            return customerRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Customer> getCustomers() throws Exception {
+        return customerRepository.getAll();
     }
 
     public List<CustomerType> getCustomerTypes(){
@@ -56,13 +54,9 @@ public class CustomerController {
     }
 
     public String save(){
-        try {
-            customerRepository.saveOrUpdate(this.currentCustomer);
-            this.currentCustomer = new Customer();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        customerRepository.saveOrUpdate(this.currentCustomer);
+        this.currentCustomer = new Customer();
         return "/customer/customerlist?faces-redirect=true";
     }
 }

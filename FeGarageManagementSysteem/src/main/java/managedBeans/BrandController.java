@@ -1,12 +1,13 @@
 package managedBeans;
 
 import domain.Brand;
-import domain.Customer;
+import interceptor.TestInterceptor;
 import repositories.BrandRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Stateless
 @Named("brandController")
+@Interceptors(TestInterceptor.class)
 public class BrandController {
     private Brand currentBrand;
 
@@ -40,23 +42,15 @@ public class BrandController {
         return this.currentBrand;
     }
 
-    public List<Brand> getBrands(){
-        try {
-            return brandRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Brand> getBrands() throws Exception {
+
+        return brandRepository.getAll();
     }
 
     public String save(){
-        try {
-            brandRepository.saveOrUpdate(this.currentBrand);
-            this.currentBrand = new Brand();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        brandRepository.saveOrUpdate(this.currentBrand);
+        this.currentBrand = new Brand();
         return "/brand/brandlist?faces-redirect=true";
     }
 }

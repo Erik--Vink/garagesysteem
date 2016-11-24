@@ -1,5 +1,6 @@
 package domain;
 
+import interceptor.MyInterceptorBinding;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.Collection;
 @NamedQueries({
 		@NamedQuery(name = "findAllCustomers", query = "SELECT e FROM Customer e")
 })
+@MyInterceptorBinding
 public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

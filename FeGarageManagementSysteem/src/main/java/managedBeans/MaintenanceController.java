@@ -1,9 +1,9 @@
 package managedBeans;
 
-import domain.Brand;
 import domain.CustomerCar;
 import domain.Maintenance;
 import domain.MaintenanceOption;
+import interceptor.TestInterceptor;
 import repositories.CustomerCarRepository;
 import repositories.MaintenanceOptionRepository;
 import repositories.MaintenanceRepository;
@@ -11,6 +11,7 @@ import repositories.MaintenanceRepository;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Named(value = "maintenanceController")
 @Stateless
+@Interceptors(TestInterceptor.class)
 public class MaintenanceController {
 
     private Maintenance currentMaintenance;
@@ -56,24 +58,12 @@ public class MaintenanceController {
         this.selectedMaintenanceOptions = selectedMaintenanceOptions;
     }
 
-    public List<CustomerCar> getCustomerCars(){
-        List<CustomerCar> customerCars = null;
-        try {
-            customerCars = customerCarRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return customerCars;
+    public List<CustomerCar> getCustomerCars() throws Exception {
+        return customerCarRepository.getAll();
     }
 
-    public List<MaintenanceOption> getMaintenanceOptions(){
-        List<MaintenanceOption> maintenanceOptions = null;
-        try {
-            maintenanceOptions = maintenanceOptionRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return maintenanceOptions;
+    public List<MaintenanceOption> getMaintenanceOptions() throws Exception {
+        return maintenanceOptionRepository.getAll();
     }
 
     public String prepareCreate(){
@@ -95,29 +85,22 @@ public class MaintenanceController {
     }
 
 
-    public List<Maintenance> getMaintenances(){
-        try {
-            return maintenanceRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<Maintenance> getMaintenances() throws Exception {
+        return maintenanceRepository.getAll();
     }
 
-    public String save(){
-        try {
-            this.currentMaintenance.setCustomerCar(customerCarRepository.getById(this.customerCarId));
-            ArrayList<MaintenanceOption> maintenanceOptions = new ArrayList<>();
-            for (long id : this.selectedMaintenanceOptions) {
-               maintenanceOptions.add(maintenanceOptionRepository.getById(id));
-            }
-            this.currentMaintenance.setMaintenanceOptions(maintenanceOptions);
-            maintenanceRepository.saveOrUpdate(this.currentMaintenance);
-            this.currentMaintenance = new Maintenance();
+    public String save() throws Exception {
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        this.currentMaintenance.setCustomerCar(customerCarRepository.getById(this.customerCarId));
+        ArrayList<MaintenanceOption> maintenanceOptions = new ArrayList<>();
+
+        for (long id : this.selectedMaintenanceOptions) {
+            maintenanceOptions.add(maintenanceOptionRepository.getById(id));
         }
+        this.currentMaintenance.setMaintenanceOptions(maintenanceOptions);
+        maintenanceRepository.saveOrUpdate(this.currentMaintenance);
+        this.currentMaintenance = new Maintenance();
+
         return "/maintenance/maintenancelist?faces-redirect=true";
     }
 }

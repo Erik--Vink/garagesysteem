@@ -2,12 +2,14 @@ package managedBeans;
 
 import domain.Brand;
 import domain.Model;
+import interceptor.TestInterceptor;
 import repositories.BrandRepository;
 import repositories.ModelRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Stateless
 @Named("modelController")
+@Interceptors(TestInterceptor.class)
 public class ModelController {
     private Model currentModel;
     private long brandId;
@@ -54,35 +57,23 @@ public class ModelController {
         this.brandId = brandId;
     }
 
-    public List<Brand> getBrands(){
-        List<Brand> brands = null;
-        try {
-            brands = brandRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return brands;
+    public List<Brand> getBrands() throws Exception {
+
+        return brandRepository.getAll();
     }
 
-    public List<Model> getModels(){
-        List<Model> models = null;
-        try {
-            models = modelRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return models;
+    public List<Model> getModels() throws Exception {
+
+        return modelRepository.getAll();
     }
 
-    public String save(){
-        try {
-            this.currentModel.setBrand(brandRepository.getById(brandId));
-            modelRepository.saveOrUpdate(this.currentModel);
-            this.currentModel = new Model();
-            brandId = 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String save() throws Exception {
+
+        this.currentModel.setBrand(brandRepository.getById(brandId));
+        modelRepository.saveOrUpdate(this.currentModel);
+        this.currentModel = new Model();
+        brandId = 0;
+
         return "/model/modellist?faces-redirect=true";
     }
 

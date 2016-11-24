@@ -1,13 +1,13 @@
 package managedBeans;
 
-import domain.Maintenance;
 import domain.MaintenanceOption;
+import interceptor.TestInterceptor;
 import repositories.MaintenanceOptionRepository;
-import repositories.MaintenanceRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Named(value = "maintenanceOptionController")
 @Stateless
+@Interceptors(TestInterceptor.class)
 public class MaintenanceOptionController {
 
     private MaintenanceOption currentMaintenanceOption;
@@ -42,23 +43,14 @@ public class MaintenanceOptionController {
         return this.currentMaintenanceOption;
     }
 
-    public List<MaintenanceOption> getMaintenanceOptions(){
-        try {
-            return maintenanceOptionRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<MaintenanceOption> getMaintenanceOptions() throws Exception {
+        return maintenanceOptionRepository.getAll();
     }
 
     public String save(){
-        try {
-            maintenanceOptionRepository.saveOrUpdate(this.currentMaintenanceOption);
-            this.currentMaintenanceOption = new MaintenanceOption();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        maintenanceOptionRepository.saveOrUpdate(this.currentMaintenanceOption);
+        this.currentMaintenanceOption = new MaintenanceOption();
         return "/maintenanceoption/maintenanceoptionlist?faces-redirect=true";
     }
 }

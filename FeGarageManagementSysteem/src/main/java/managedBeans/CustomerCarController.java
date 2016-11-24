@@ -4,6 +4,7 @@ import domain.Customer;
 import domain.CustomerCar;
 import domain.Driver;
 import domain.Version;
+import interceptor.TestInterceptor;
 import repositories.CustomerCarRepository;
 import repositories.CustomerRepository;
 import repositories.DriverRepository;
@@ -12,6 +13,7 @@ import repositories.VersionRepository;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @Stateless
 @Named("customerCarController")
+@Interceptors(TestInterceptor.class)
 public class CustomerCarController {
     private long driverId, customerId, versionId;
     private CustomerCar customerCar;

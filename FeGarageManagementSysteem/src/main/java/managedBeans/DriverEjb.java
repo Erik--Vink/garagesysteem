@@ -1,18 +1,20 @@
 package managedBeans;
 
-import domain.Brand;
 import domain.Driver;
+import interceptor.TestInterceptor;
 import repositories.DriverRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
+import javax.interceptor.Interceptors;
 
 /**
  * Created by Kenzo Dominicus on 24-11-2016.
  */
 @Stateless
 @Named("DriverEjb")
+@Interceptors(TestInterceptor.class)
 public class DriverEjb {
     private Driver driver;
 
@@ -28,12 +30,9 @@ public class DriverEjb {
     }
 
     public String save(){
-        try {
-            driverRepository.saveOrUpdate(driver);
-            driver = new Driver();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        driverRepository.saveOrUpdate(driver);
+        driver = new Driver();
         return "/index?faces-redirect=true";
     }
 }
