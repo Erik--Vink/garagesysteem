@@ -11,7 +11,7 @@
                 <div class="container">
                     <div class="col-sm-12">
                         <h1>Klanten</h1>
-                        <h:dataTable value="#{CustomerListEjb.customers}" var="item" styleClass="table table-striped table-middle-align">
+                        <h:dataTable value="#{customerController.customers}" var="item" styleClass="table table-striped table-middle-align">
                             <h:column>
                                 <f:facet name="header">Klant type</f:facet>
                                 <h:outputText value="#{item.customerType}"/>
@@ -38,10 +38,9 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header"></f:facet>
-                                <h:link outcome="customerdetails" styleClass="btn btn-warning">
-                                    <f:param name="customerId" value="#{item.id}" />
+                                <h:commandLink action="#{customerController.prepareEdit(item)}" styleClass="btn btn-warning">
                                     <span class="fa fa-pencil"></span>
-                                </h:link>
+                                </h:commandLink>
                             </h:column>
                         </h:dataTable>
                     </div>
