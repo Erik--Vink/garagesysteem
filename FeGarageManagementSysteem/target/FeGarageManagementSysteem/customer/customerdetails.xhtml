@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>
+                                    <h:outputText value="Klant wijzigen" rendered="#{customerController.customer.id != 0}" />
+                                    <h:outputText value="Klant toevoegen" rendered="#{customerController.customer.id == 0}" />
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="customerType" class="col-sm-4">Customer type</label>
+                                    <div class="col-sm-8">
+                                        <h:selectOneMenu value="#{customerController.customer.customerType}" styleClass="form-control" id="customerType">
+                                            <c:forEach items="#{customerController.customerTypes}" var="type">
+                                                <f:selectItem itemValue="${type}" itemLabel="${type}"/>
+                                            </c:forEach>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="firstName" class="col-sm-4">Firstname</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="firstName" styleClass="form-control" value="#{customerController.customer.firstName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="lastName" class="col-sm-4">Lastname</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="lastName" styleClass="form-control" value="#{customerController.customer.lastName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="companyName" class="col-sm-4">Company name</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="companyName" styleClass="form-control" value="#{customerController.customer.companyName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="city" class="col-sm-4">City</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="city" styleClass="form-control" value="#{customerController.customer.city}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="postalCode" class="col-sm-4">Zipcode</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="postalCode" styleClass="form-control" value="#{customerController.customer.postalCode}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="streetAdress" class="col-sm-4">Address</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="streetAdress" styleClass="form-control" value="#{customerController.customer.streetAdress}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="phoneNumber" class="col-sm-4">Phonenumber</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="phoneNumber" styleClass="form-control" value="#{customerController.customer.phoneNumber}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="mailAdress" class="col-sm-4">Email</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="mailAdress" styleClass="form-control" value="#{customerController.customer.mailAdress}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="accountNumber" class="col-sm-4">Accountnumber</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="accountNumber" styleClass="form-control" value="#{customerController.customer.accountNumber}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="vatNumber" class="col-sm-4">Vatnumber</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="vatNumber" styleClass="form-control" value="#{customerController.customer.vatNumber}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h:commandButton type="submit"  value="Save" action="#{customerController.save()}" styleClass="btn btn-success"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+

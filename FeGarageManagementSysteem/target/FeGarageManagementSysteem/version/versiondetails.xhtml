@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>Uitvoering details</h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="motor" class="col-sm-4">Motor</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="motor" styleClass="form-control" value="#{VersionEjb.version.motor}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="versionName" class="col-sm-4">Uitvoering</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="versionName" styleClass="form-control" value="#{VersionEjb.version.versionName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="Model" class="col-sm-4">Model</label>
+                                        <div class="col-sm-8">
+                                            <h:selectOneMenu value="#{VersionEjb.modelId}" styleClass="form-control" id="Model">
+                                                <f:selectItems value="#{VersionEjb.models}" var="model" itemValue="#{model.id}" itemLabel="#{model.brand.brandName.concat(' ').concat(model.modelName)}"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h:commandButton type="submit"  value="Save" action="#{VersionEjb.save()}" styleClass="btn btn-success"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+

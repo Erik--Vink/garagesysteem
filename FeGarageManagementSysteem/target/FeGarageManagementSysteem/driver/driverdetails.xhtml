@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>Bestuurder details</h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="firstName" class="col-sm-4">Voornaam</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="firstName" styleClass="form-control" value="#{DriverEjb.driver.firstName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="lastName" class="col-sm-4">Achternaam</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="lastName" styleClass="form-control" value="#{DriverEjb.driver.lastName}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="phoneNumber" class="col-sm-4">Telefoonnummer</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="phoneNumber" styleClass="form-control" value="#{DriverEjb.driver.phoneNumber}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h:commandButton type="submit"  value="Save" action="#{DriverEjb.save()}" styleClass="btn btn-success"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+

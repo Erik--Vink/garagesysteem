@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>
+                                    <h:outputText value="Klantauto wijzigen" rendered="#{customerCarController.customerCar.id != 0}" />
+                                    <h:outputText value="Klantauto toevoegen" rendered="#{customerCarController.customerCar.id == 0}" />
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="numberPlate" class="col-sm-4">Kenteken</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText id="numberPlate" styleClass="form-control" value="#{customerCarController.customerCar.numberPlate}"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="Version" class="col-sm-4">Uitvoering</label>
+                                    <div class="col-sm-8">
+                                        <h:selectOneMenu value="#{customerCarController.versionId}" styleClass="form-control" id="Version">
+                                            <f:selectItems value="#{customerCarController.versions}" var="version" itemValue="#{version.id}" itemLabel="#{version.model.brand.brandName.concat(' ').concat(version.model.modelName).concat(' ').concat(version.versionName)}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="Customer" class="col-sm-4">Klant</label>
+                                    <div class="col-sm-8">
+                                        <h:selectOneMenu value="#{customerCarController.customerId}" styleClass="form-control" id="Customer">
+                                            <f:selectItems value="#{customerCarController.customers}" var="customer" itemValue="#{customer.id}" itemLabel="#{customer.fullName}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="Driver" class="col-sm-4">Bestuurder</label>
+                                    <div class="col-sm-8">
+                                        <h:selectOneMenu value="#{customerCarController.driverId}" styleClass="form-control" id="Driver">
+                                            <f:selectItem itemValue="#{null}" itemLabel="Geen Bestuurder" />
+                                            <f:selectItems value="#{customerCarController.drivers}" var="driver" itemValue="#{driver.id}" itemLabel="#{driver.lastName.concat(', ').concat(driver.firstName)}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h:commandButton type="submit"  value="Save" action="#{customerCarController.save()}" styleClass="btn btn-success"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+
