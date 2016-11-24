@@ -55,6 +55,7 @@
                                     <label for="Driver" class="col-sm-4">Bestuurder</label>
                                     <div class="col-sm-8">
                                         <h:selectOneMenu value="#{customerCarController.driverId}" styleClass="form-control" id="Driver">
+                                            <f:selectItem itemValue="#{null}" itemLabel="Geen Bestuurder" />
                                             <f:selectItems value="#{customerCarController.drivers}" var="driver" itemValue="#{driver.id}" itemLabel="#{driver.lastName.concat(', ').concat(driver.firstName)}"/>
                                         </h:selectOneMenu>
                                     </div>
