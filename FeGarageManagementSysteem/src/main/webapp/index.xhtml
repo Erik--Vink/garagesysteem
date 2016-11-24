@@ -34,8 +34,8 @@
                                    <span class="fa fa-user fa-5x"></span>
                                </div>
                                <ul class="menu-item-links">
-                                   <li><a href="customer/customerlist.xhtml">Customers</a></li>
-                                   <li><a href="customer/customerdetails.xhtml">New customer</a></li>
+                                   <li><h:commandLink value="Klanten" action="#{customerController.prepareList}"/></li>
+                                   <li><h:commandLink value="Nieuwe klant" action="#{customerController.prepareCreate}"/></li>
                                </ul>
                            </div>
                        </div>
