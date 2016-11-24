@@ -18,6 +18,7 @@ import java.util.List;
 public class VersionEjb {
 
     private Version version;
+    private long modelId;
 
     @EJB
     private VersionRepository versionRepository;
@@ -26,10 +27,17 @@ public class VersionEjb {
 
     public VersionEjb() {
         this.version = new Version();
+        this.modelId = 0;
     }
 
     public Version getVersion() {
         return version;
+    }
+    public long getModelId(){
+        return modelId;
+    }
+    public void setModelId(long modelId){
+        this.modelId = modelId;
     }
 
     public List<Model> getModels() {
@@ -44,8 +52,10 @@ public class VersionEjb {
 
     public String save() {
         try {
+            version.setModel(modelRepository.getById(modelId));
             versionRepository.saveOrUpdate(version);
             version = new Version();
+            modelId = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
