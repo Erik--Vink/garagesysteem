@@ -4,7 +4,9 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
 <h:body>
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
@@ -30,14 +32,13 @@
                                 <div class="form-group">
                                     <label for="Brand" class="col-sm-4">Merk</label>
                                     <div class="col-sm-8">
-                                        <h:selectOneMenu value="#{ModelEjb.model.brand}" styleClass="form-control" id="Brand">
-                                            <c:forEach items="${ModelEjb.brands}" var="brand">
-                                                <f:selectItem itemValue="${brand}" itemLabel="${brand.brandName}"/>
-                                            </c:forEach>
+                                        <h:selectOneMenu value="#{ModelEjb.brandId}" styleClass="form-control" id="Brand">
+                                            <f:selectItems value="#{ModelEjb.brands}" var="brand" itemValue="#{brand.id}" itemLabel="#{brand.brandName}"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="row">
                                 <div class="col-sm-12">

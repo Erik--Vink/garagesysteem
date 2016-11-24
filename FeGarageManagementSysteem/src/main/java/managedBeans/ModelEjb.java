@@ -17,6 +17,7 @@ import java.util.List;
 @Named("ModelEjb")
 public class ModelEjb {
     private Model model;
+    private long brandId;
 
     @EJB
     ModelRepository modelRepository;
@@ -25,10 +26,19 @@ public class ModelEjb {
 
     public ModelEjb(){
         this.model = new Model();
+        this.brandId = 0;
     }
 
     public Model getModel(){
         return model;
+    }
+
+    public long getBrandId(){
+        return brandId;
+    }
+
+    public void setBrandId(long brandId){
+        this.brandId = brandId;
     }
 
     public List<Brand> getBrands(){
@@ -43,8 +53,10 @@ public class ModelEjb {
 
     public String save(){
         try {
+            model.setBrand(brandRepository.getById(brandId));
             modelRepository.saveOrUpdate(model);
             model = new Model();
+            brandId = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
