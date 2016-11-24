@@ -63,6 +63,6 @@ public class CustomerController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/index?faces-redirect=true";
+        return "/customer/customerlist?faces-redirect=true";
     }
 }

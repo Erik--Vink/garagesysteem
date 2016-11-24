@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class ConfigBean {
     private StatusRepository statusRepository;
 
     @PostConstruct
-    public void createData() throws Exception {
+    public void createData() {
 
 
         // particulier
@@ -139,9 +140,9 @@ public class ConfigBean {
                 .build());
 
         Maintenance maintenanceCustomer = maintenanceRepository.saveOrUpdate(Maintenance.builder()
-                .apk(false)
+                .apk(true)
                 .remark("None")
-                .startDate(LocalDateTime.now())
+                .startDate(java.sql.Date.valueOf(LocalDate.now()))
                 .customerCar(customerCar)
                 .maintenanceOptions(maintenanceOptions)
                 .build());

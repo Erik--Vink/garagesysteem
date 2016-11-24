@@ -3,8 +3,10 @@ package domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by Kenzo Dominicus on 22-11-2016.
@@ -25,12 +27,11 @@ public class Maintenance {
 	@ManyToOne
 	@JoinColumn(name="customercar_id")
 	private CustomerCar customerCar;
-	private LocalDateTime startDate;
+	private Date startDate;
 	@ManyToMany
 	private Collection<MaintenanceOption> maintenanceOptions;
 	private String remark;
 	private boolean apk;
 	@OneToMany(mappedBy = "maintenance")
 	private Collection<Status> statuses;
-
 }

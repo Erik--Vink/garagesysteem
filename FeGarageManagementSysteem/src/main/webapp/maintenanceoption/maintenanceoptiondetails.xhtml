@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>
+                                    <h:outputText value="Onderhoudsbeurtoptie wijzigen" rendered="#{maintenanceOptionController.maintenanceOption.id != 0}" />
+                                    <h:outputText value="Onderhoudsbeurtoptie toevoegen" rendered="#{maintenanceOptionController.maintenanceOption.id == 0}" />
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="description" class="col-sm-4">Omschrijving</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceOptionController.maintenanceOption.description}" styleClass="form-control" id="description"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="price" class="col-sm-4">Prijs</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceOptionController.maintenanceOption.price}" styleClass="form-control" id="price"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="durationInMinutes" class="col-sm-4">Duur in minuten</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceOptionController.maintenanceOption.durationInMinutes}" styleClass="form-control" id="durationInMinutes"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="tasks" class="col-sm-4">Taken</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceOptionController.maintenanceOption.tasks}" styleClass="form-control" id="tasks"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h:commandButton type="submit"  value="Save" action="#{maintenanceOptionController.save()}" styleClass="btn btn-success"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+

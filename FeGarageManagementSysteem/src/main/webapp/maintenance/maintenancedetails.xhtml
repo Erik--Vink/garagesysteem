@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1>
+                                    <h:outputText value="Onderhoudsbeurt wijzigen" rendered="#{maintenanceController.maintenance.id != 0}" />
+                                    <h:outputText value="Onderhoudsbeurt toevoegen" rendered="#{maintenanceController.maintenance.id == 0}" />
+                                </h1>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="customerCar" class="col-sm-4">Klant auto</label>
+                                    <div class="col-sm-8">
+                                        <h:selectOneMenu value="#{maintenanceController.customerCarId}" styleClass="form-control" id="customerCar">
+                                            <f:selectItems value="#{maintenanceController.customerCars}" var="customerCar" itemValue="#{customerCar.id}" itemLabel="#{customerCar.numberPlate}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="customerCar" class="col-sm-4">Onderhoudopties</label>
+                                    <div class="col-sm-8">
+                                        <h:selectManyCheckbox value="#{maintenanceController.selectedMaintenanceOptions}" styleClass="multiple-checkbox">
+                                            <f:selectItems value="#{maintenanceController.maintenanceOptions}" var="option"
+                                                           itemLabel="#{option.description}" itemValue="#{option.id}" />
+                                        </h:selectManyCheckbox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="startDate" class="col-sm-4">Startdatum</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceController.maintenance.startDate}" styleClass="form-control" id="startDate">
+                                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="remark" class="col-sm-4">Opmerking</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceController.maintenance.remark}" styleClass="form-control" id="remark"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="apk" class="col-sm-4">Apk</label>
+                                    <div class="col-sm-8">
+                                        <h:selectBooleanCheckbox value="#{maintenanceController.maintenance.apk}" styleClass="checkbox" id="apk"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h:commandButton type="submit"  value="Save" action="#{maintenanceController.save()}" styleClass="btn btn-success"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+
