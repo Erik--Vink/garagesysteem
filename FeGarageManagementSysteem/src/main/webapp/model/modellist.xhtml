@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:body>
+    <ui:composition template="../templates/template.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <div class="container">
+                    <div class="col-sm-12">
+                        <h1>Merken</h1>
+                        <h:dataTable value="#{modelController.models}" var="item" styleClass="table table-striped table-middle-align">
+                            <h:column>
+                                <f:facet name="header">Model naam</f:facet>
+                                <h:outputText value="#{item.modelName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Merk naam</f:facet>
+                                <h:outputText value="#{item.brand.brandName}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <h:commandLink action="#{modelController.prepareEdit(item)}" styleClass="btn btn-warning">
+                                    <span class="fa fa-pencil"></span>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
+
