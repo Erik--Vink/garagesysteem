@@ -36,4 +36,12 @@ public class Customer {
 	private String accountNumber;
 	private String vatNumber;
 
+	public String getFullName(){
+		if(this.customerType == CustomerType.PRIVATE){
+			return lastName.concat(", ").concat(firstName);
+		} else {
+			return companyName;
+		}
+	}
+
 }

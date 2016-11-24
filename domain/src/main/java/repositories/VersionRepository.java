@@ -47,7 +47,7 @@ public class VersionRepository {
         TypedQuery<Version> query;
 
         try {
-            query = entityManager.createNamedQuery("findAllModels", Version.class);
+            query = entityManager.createNamedQuery("findAllVersions", Version.class);
             return query.getResultList();
         } catch (Exception ex) {
             throw new Exception("Could not get all " + ex);
