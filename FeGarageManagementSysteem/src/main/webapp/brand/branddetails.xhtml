@@ -14,21 +14,24 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h1>Merk details</h1>
+                                <h1>
+                                    <h:outputText value="Merk wijzigen" rendered="#{brandController.brand.id != 0}" />
+                                    <h:outputText value="Merk toevoegen" rendered="#{brandController.brand.id == 0}" />
+                                </h1>
                             </div>
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
                                     <label for="brandName" class="col-sm-4">Merknaam</label>
                                     <div class="col-sm-8">
-                                        <h:inputText id="brandName" styleClass="form-control" value="#{BrandEjb.brand.brandName}"/>
+                                        <h:inputText id="brandName" styleClass="form-control" value="#{brandController.brand.brandName}"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h:commandButton type="submit"  value="Save" action="#{BrandEjb.save()}" styleClass="btn btn-success"/>
+                                    <h:commandButton type="submit"  value="Save" action="#{brandController.save()}" styleClass="btn btn-success"/>
                                 </div>
                             </div>
                         </div>

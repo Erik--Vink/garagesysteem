@@ -19,8 +19,8 @@
                                    <span class="fa fa-car fa-5x"></span>
                                </div>
                                <ul class="menu-item-links">
-                                   <li><a href="#">Merken</a></li>
-                                   <li><a href="brand/branddetails.xhtml">Merk toevoegen</a></li>
+                                   <li><h:commandLink value="Merken" action="#{brandController.prepareList}"/></li>
+                                   <li><h:commandLink value="Merk toevoegen" action="#{brandController.prepareCreate}"/></li>
                                    <li><a href="#">Modellen</a></li>
                                    <li><a href="model/modeldetails.xhtml">Model toevoegen</a></li>
                                    <li><a href="#">Uitvoeringen</a></li>
