@@ -14,14 +14,17 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h1>Model details</h1>
+                                <h1>
+                                    <h:outputText value="Model wijzigen" rendered="#{modelController.model.id != 0}" />
+                                    <h:outputText value="Model toevoegen" rendered="#{modelController.model.id == 0}" />
+                                </h1>
                             </div>
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
                                     <label for="modelName" class="col-sm-4">Modelnaam</label>
                                     <div class="col-sm-8">
-                                        <h:inputText id="modelName" styleClass="form-control" value="#{ModelEjb.model.modelName}"/>
+                                        <h:inputText id="modelName" styleClass="form-control" value="#{modelController.model.modelName}"/>
                                     </div>
                                 </div>
                             </div>
@@ -30,8 +33,8 @@
                                 <div class="form-group">
                                     <label for="Brand" class="col-sm-4">Merk</label>
                                     <div class="col-sm-8">
-                                        <h:selectOneMenu value="#{ModelEjb.brandId}" styleClass="form-control" id="Brand">
-                                            <f:selectItems value="#{ModelEjb.brands}" var="brand" itemValue="#{brand.id}" itemLabel="#{brand.brandName}"/>
+                                        <h:selectOneMenu value="#{modelController.brandId}" styleClass="form-control" id="Brand">
+                                            <f:selectItems value="#{modelController.brands}" var="brand" itemValue="#{brand.id}" itemLabel="#{brand.brandName}"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>
@@ -40,7 +43,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h:commandButton type="submit"  value="Save" action="#{ModelEjb.save()}" styleClass="btn btn-success"/>
+                                    <h:commandButton type="submit"  value="Save" action="#{modelController.save()}" styleClass="btn btn-success"/>
                                 </div>
                             </div>
                         </div>

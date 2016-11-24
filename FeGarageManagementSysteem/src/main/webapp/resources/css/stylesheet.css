@@ -28,3 +28,7 @@
     vertical-align: middle !important;
 }
 
+.multiple-checkbox td{
+    padding-right: 15px;
+}
+
