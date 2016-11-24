@@ -79,12 +79,14 @@ public class MaintenanceController {
     public String prepareCreate(){
         this.currentMaintenance = new Maintenance();
         this.customerCarId = 0;
+        this.selectedMaintenanceOptions = new long[0];
         return "/maintenance/maintenancedetails?faces-redirect=true";
     }
 
-    public String prepareEdit(Maintenance maintenance){
+    public String prepareEdit(Maintenance maintenance) throws Exception {
         this.currentMaintenance = maintenance;
         this.customerCarId = maintenance.getCustomerCar().getId();
+        this.selectedMaintenanceOptions = maintenance.getMaintenanceOptions().stream().mapToLong(MaintenanceOption::getId).toArray();
         return "/maintenance/maintenancedetails?faces-redirect=true";
     }
 

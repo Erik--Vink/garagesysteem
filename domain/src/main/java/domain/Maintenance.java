@@ -28,7 +28,7 @@ public class Maintenance {
 	@JoinColumn(name="customercar_id")
 	private CustomerCar customerCar;
 	private Date startDate;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<MaintenanceOption> maintenanceOptions;
 	private String remark;
 	private boolean apk;
