@@ -4,7 +4,7 @@ import domain.Customer;
 import domain.CustomerCar;
 import domain.Driver;
 import domain.Version;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.CustomerCarRepository;
 import repositories.CustomerRepository;
 import repositories.DriverRepository;
@@ -21,10 +21,10 @@ import java.util.List;
  */
 @Stateless
 @Named("customerCarController")
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class CustomerCarController {
     private long driverId, customerId, versionId;
-    private CustomerCar customerCar;
+    private CustomerCar currentCustomerCar;
 
     @EJB
     private VersionRepository versionRepository;
@@ -35,11 +35,23 @@ public class CustomerCarController {
     @EJB
     private CustomerCarRepository customerCarRepository;
 
-    public CustomerCarController() {
-        this.customerCar = new CustomerCar();
-        this.driverId = 0;
-        this.customerId = 0;
-        this.versionId = 0;
+    public CustomerCarController() {}
+
+    public String prepareCreate(){
+        this.currentCustomerCar = new CustomerCar();
+        return "/customercar/customercardetails?faces-redirect=true";
+    }
+
+    public String prepareEdit(CustomerCar customerCar){
+        this.currentCustomerCar = customerCar;
+        this.driverId = customerCar.getDriver() != null ? customerCar.getDriver().getId(): 0;
+        this.customerId = customerCar.getCustomer() != null ? customerCar.getCustomer().getId(): 0;
+        this.versionId = customerCar.getVersion() != null ? customerCar.getVersion().getId(): 0;
+        return "/customercar/customercardetails?faces-redirect=true";
+    }
+
+    public String prepareList(){
+        return "/customercar/customercarlist?faces-redirect=true";
     }
 
     public long getDriverId() {
@@ -67,61 +79,42 @@ public class CustomerCarController {
     }
 
     public CustomerCar getCustomerCar() {
-        return customerCar;
+        return currentCustomerCar;
     }
 
     public void setCustomerCar(CustomerCar customerCar) {
-        this.customerCar = customerCar;
+        this.currentCustomerCar = customerCar;
     }
 
-    public List<Version> getVersions() {
-        List<Version> versions = null;
-        try {
-            versions = versionRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return versions;
+    public List<CustomerCar> getCustomerCars() throws Exception {
+        return customerCarRepository.getAll();
     }
 
-    public List<Customer> getCustomers() {
-        List<Customer> customers = null;
-        try {
-            customers = customerRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return customers;
+    public List<Version> getVersions() throws Exception {
+        return versionRepository.getAll();
     }
 
-    public List<Driver> getDrivers() {
-        List<Driver> drivers = null;
-        try {
-            drivers = driverRepository.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return drivers;
+    public List<Customer> getCustomers() throws Exception {
+        return customerRepository.getAll();
     }
 
-    public String save() {
-        try {
-            customerCar.setVersion(versionRepository.getById(versionId));
-            customerCar.setCustomer(customerRepository.getById(customerId));
-            if(driverId != 0){
-                customerCar.setDriver(driverRepository.getById(driverId));
-            }
+    public List<Driver> getDrivers() throws Exception {
+        return driverRepository.getAll();
+    }
 
-
-            customerCarRepository.saveOrUpdate(customerCar);
-            customerCar = new CustomerCar();
-            versionId = 0;
-            customerId = 0;
-            driverId = 0;
-        } catch (Exception e) {
-            e.printStackTrace();
+    public String save() throws Exception {
+        this.currentCustomerCar.setVersion(versionRepository.getById(versionId));
+        this.currentCustomerCar.setCustomer(customerRepository.getById(customerId));
+        if(driverId != 0){
+            this.currentCustomerCar.setDriver(driverRepository.getById(driverId));
         }
 
-        return "/index?faces-redirect=true";
+        customerCarRepository.saveOrUpdate(this.currentCustomerCar);
+        this.currentCustomerCar = new CustomerCar();
+        this.versionId = 0;
+        this.customerId = 0;
+        this.driverId = 0;
+
+        return "/customercar/customercarlist?faces-redirect=true";
     }
 }

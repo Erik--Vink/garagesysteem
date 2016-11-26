@@ -5,7 +5,7 @@
        bean-discovery-mode="all">
 
     <interceptors>
-        <class>interceptor.TestInterceptor</class>
+        <class>interceptor.ErrorLoggingInterceptor</class>
     </interceptors>
 
 </beans>

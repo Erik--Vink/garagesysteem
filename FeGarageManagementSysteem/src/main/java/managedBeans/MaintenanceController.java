@@ -3,7 +3,7 @@ package managedBeans;
 import domain.CustomerCar;
 import domain.Maintenance;
 import domain.MaintenanceOption;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.CustomerCarRepository;
 import repositories.MaintenanceOptionRepository;
 import repositories.MaintenanceRepository;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Named(value = "maintenanceController")
 @Stateless
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class MaintenanceController {
 
     private Maintenance currentMaintenance;

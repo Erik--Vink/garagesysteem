@@ -1,7 +1,7 @@
 package managedBeans;
 
 import domain.MaintenanceOption;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.MaintenanceOptionRepository;
 
 import javax.ejb.EJB;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Named(value = "maintenanceOptionController")
 @Stateless
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class MaintenanceOptionController {
 
     private MaintenanceOption currentMaintenanceOption;

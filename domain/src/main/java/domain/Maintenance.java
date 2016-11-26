@@ -1,6 +1,6 @@
 package domain;
 
-import interceptor.MyInterceptorBinding;
+import interceptor.ErrorLoggingInterceptorBinding;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,7 +19,7 @@ import java.util.Date;
 @NamedQueries({
 		@NamedQuery(name = "findAllMaintenances", query = "SELECT e FROM Maintenance e")
 })
-@MyInterceptorBinding
+@ErrorLoggingInterceptorBinding
 public class Maintenance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

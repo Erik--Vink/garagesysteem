@@ -2,7 +2,7 @@ package managedBeans;
 
 import domain.Model;
 import domain.Version;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.ModelRepository;
 import repositories.VersionRepository;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Stateless
 @Named("VersionEjb")
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class VersionEjb {
 
     private Version version;
@@ -44,10 +44,7 @@ public class VersionEjb {
     }
 
     public List<Model> getModels() throws Exception {
-
-            return modelRepository.getAll();
-
-
+        return modelRepository.getAll();
     }
 
     public String save() throws Exception {
