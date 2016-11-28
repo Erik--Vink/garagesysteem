@@ -6,9 +6,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Singleton
 @Startup
@@ -140,10 +143,15 @@ public class ConfigBean {
                 .version(opelZafira)
                 .build());
 
+        LocalDateTime now = LocalDateTime.now();
+        Instant instant = now.atZone(ZoneId.systemDefault()).toInstant();
+        Date dateFromOld = Date.from(instant);
+
         Maintenance maintenanceCustomer = maintenanceRepository.saveOrUpdate(Maintenance.builder()
                 .apk(true)
+                .barcode("12345")
                 .remark("None")
-                .startDate(java.sql.Date.valueOf(LocalDate.now()))
+                .startDate(dateFromOld)
                 .customerCar(customerCar)
                 .maintenanceOptions(maintenanceOptions)
                 .build());

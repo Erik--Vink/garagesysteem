@@ -23,8 +23,8 @@
                                    <li><h:commandLink value="Merk toevoegen" action="#{brandController.prepareCreate}"/></li>
                                    <li><h:commandLink value="Modellen" action="#{modelController.prepareList}"/></li>
                                    <li><h:commandLink value="Model toevoegen" action="#{modelController.prepareCreate}"/></li>
-                                   <li><a href="#">Uitvoeringen</a></li>
-                                   <li><a href="version/versiondetails.xhtml">Uitvoeringen toevoegen</a></li>
+                                   <li><h:commandLink value="Uitvoeringen" action="#{versionController.prepareList}"/></li>
+                                   <li><h:commandLink value="Uitvoering toevoegen" action="#{versionController.prepareCreate}"/></li>
                                </ul>
                            </div>
                        </div>
@@ -36,8 +36,8 @@
                                <ul class="menu-item-links">
                                    <li><h:commandLink value="Klanten" action="#{customerController.prepareList}"/></li>
                                    <li><h:commandLink value="Nieuwe klant" action="#{customerController.prepareCreate}"/></li>
-                                   <li><a href="#">Auto's van klanten</a></li>
-                                   <li><a href="customercar/customercardetails.xhtml">Klantauto toevoegen</a></li>
+                                   <li><h:commandLink value="Auto's van klanten" action="#{customerCarController.prepareList}"/></li>
+                                   <li><h:commandLink value="Klantauto toevoegen" action="#{customerCarController.prepareCreate}"/></li>
                                    <li><a href="#">Bestuurders</a></li>
                                    <li><a href="driver/driverdetails.xhtml">Bestuurder toevoegen</a></li>
                                </ul>
@@ -50,6 +50,7 @@
                                </div>
                                <ul class="menu-item-links">
                                    <li><h:commandLink value="Onderhoudsbeurten" action="#{maintenanceController.prepareList}"/></li>
+                                   <li><h:commandLink value="Onderhoudsbeurt zoeken" action="#{maintenanceController.prepareSearch}"/></li>
                                    <li><h:commandLink value="Nieuwe onderhoudsbeurt" action="#{maintenanceController.prepareCreate}"/></li>
                                    <li><h:commandLink value="Onderhoudsbeurtopties" action="#{maintenanceOptionController.prepareList}"/></li>
                                    <li><h:commandLink value="Nieuwe onderhoudsbeurtoptie" action="#{maintenanceOptionController.prepareCreate}"/></li>

@@ -4,7 +4,8 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
     <ui:composition template="../templates/template.xhtml">
         <ui:define name="content">
@@ -46,9 +47,38 @@
                                 <div class="form-group">
                                     <label for="startDate" class="col-sm-4">Startdatum</label>
                                     <div class="col-sm-8">
-                                        <h:inputText value="#{maintenanceController.maintenance.startDate}" styleClass="form-control" id="startDate">
-                                            <f:convertDateTime pattern="dd-MM-yyyy" />
-                                        </h:inputText>
+                                        <b:dateTimePicker
+                                                value="#{maintenanceController.maintenance.startDate}"
+                                                format="DD-MM-YYYY"
+                                                label="With WidgetParent"
+                                                render-label="true"
+                                                iconAwesome="clock-o"
+                                                widgetParent="#picker-anchor"/>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label class="col-sm-4">Tijd</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <h:inputText styleClass="form-control" type="number" max="23" min="0" value="#{maintenanceController.selectedStartHours}" />
+                                            <span class="input-group-addon">:</span>
+                                            <h:inputText styleClass="form-control" type="number" max="59" min="0" value="#{maintenanceController.selectedStartMinutes}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-margin-top-small">
+                                <div class="form-group">
+                                    <label for="barcode" class="col-sm-4">Barcode</label>
+                                    <div class="col-sm-8">
+                                        <h:inputText value="#{maintenanceController.maintenance.barcode}" styleClass="form-control" id="barcode"/>
                                     </div>
                                 </div>
                             </div>

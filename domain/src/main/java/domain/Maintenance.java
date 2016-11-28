@@ -17,7 +17,8 @@ import java.util.Date;
 @Getter
 @Setter
 @NamedQueries({
-		@NamedQuery(name = "findAllMaintenances", query = "SELECT e FROM Maintenance e")
+		@NamedQuery(name = "findAllMaintenances", query = "SELECT e FROM Maintenance e"),
+		@NamedQuery(name = "findMaintenanceByBarcode" , query = "SELECT e FROM Maintenance e WHERE e.barcode = :barcode")
 })
 @ErrorLoggingInterceptorBinding
 public class Maintenance {
@@ -27,11 +28,14 @@ public class Maintenance {
 	@ManyToOne
 	@JoinColumn(name="customercar_id")
 	private CustomerCar customerCar;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date startDate;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<MaintenanceOption> maintenanceOptions;
 	private String remark;
+	private String barcode;
 	private boolean apk;
+	private boolean apkDone;
 	@OneToMany(mappedBy = "maintenance")
 	private Collection<Status> statuses;
 }

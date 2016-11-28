@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.interceptor.Interceptors;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -26,6 +27,9 @@ public class MaintenanceController {
     private Maintenance currentMaintenance;
     private long customerCarId;
     private long[] selectedMaintenanceOptions;
+    private int selectedStartHours;
+    private int selectedStartMinutes;
+    private String barcode, errorMessage;
 
     @EJB
     MaintenanceRepository maintenanceRepository;
@@ -50,12 +54,44 @@ public class MaintenanceController {
         this.customerCarId = customerCarId;
     }
 
+    public int getSelectedStartHours() {
+        return selectedStartHours;
+    }
+
+    public void setSelectedStartHours(int selectedStartHours) {
+        this.selectedStartHours = selectedStartHours;
+    }
+
+    public int getSelectedStartMinutes() {
+        return selectedStartMinutes;
+    }
+
+    public void setSelectedStartMinutes(int selectedStartMinutes) {
+        this.selectedStartMinutes = selectedStartMinutes;
+    }
+
     public long[] getSelectedMaintenanceOptions() {
         return selectedMaintenanceOptions;
     }
 
     public void setSelectedMaintenanceOptions(long[] selectedMaintenanceOptions) {
         this.selectedMaintenanceOptions = selectedMaintenanceOptions;
+    }
+
+    public String getBarcode(){
+        return barcode;
+    }
+
+    public void setBarcode(String barcode){
+        this.barcode = barcode;
+    }
+
+    public String getErrorMessage(){
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage){
+        this.errorMessage = errorMessage;
     }
 
     public List<CustomerCar> getCustomerCars() throws Exception {
@@ -67,21 +103,29 @@ public class MaintenanceController {
     }
 
     public String prepareCreate(){
-        this.currentMaintenance = new Maintenance();
-        this.customerCarId = 0;
-        this.selectedMaintenanceOptions = new long[0];
+        cleanClass();
         return "/maintenance/maintenancedetails?faces-redirect=true";
     }
 
     public String prepareEdit(Maintenance maintenance) throws Exception {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(maintenance.getStartDate());
+        this.selectedStartHours = calendar.get(Calendar.HOUR_OF_DAY);
+        this.selectedStartMinutes = calendar.get(Calendar.MINUTE);
         this.currentMaintenance = maintenance;
         this.customerCarId = maintenance.getCustomerCar().getId();
         this.selectedMaintenanceOptions = maintenance.getMaintenanceOptions().stream().mapToLong(MaintenanceOption::getId).toArray();
+        this.barcode = maintenance.getBarcode();
         return "/maintenance/maintenancedetails?faces-redirect=true";
     }
 
     public String prepareList(){
         return "/maintenance/maintenancelist?faces-redirect=true";
+    }
+
+    public String prepareSearch(){
+        cleanClass();
+        return "/maintenance/findmaintenance?faces-redirect=true";
     }
 
 
@@ -91,6 +135,12 @@ public class MaintenanceController {
 
     public String save() throws Exception {
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.currentMaintenance.getStartDate());
+        calendar.set(Calendar.HOUR_OF_DAY, this.selectedStartHours);
+        calendar.set(Calendar.MINUTE, this.selectedStartMinutes);
+        this.currentMaintenance.setStartDate(calendar.getTime());
+
         this.currentMaintenance.setCustomerCar(customerCarRepository.getById(this.customerCarId));
         ArrayList<MaintenanceOption> maintenanceOptions = new ArrayList<>();
 
@@ -98,10 +148,33 @@ public class MaintenanceController {
             maintenanceOptions.add(maintenanceOptionRepository.getById(id));
         }
         this.currentMaintenance.setMaintenanceOptions(maintenanceOptions);
+        System.out.println(this.selectedStartHours);
         maintenanceRepository.saveOrUpdate(this.currentMaintenance);
-        this.currentMaintenance = new Maintenance();
+        cleanClass();
+
 
         return "/maintenance/maintenancelist?faces-redirect=true";
+    }
+
+    public String searchMaintenance() throws Exception {
+        try {
+            Maintenance maintenance = maintenanceRepository.getByBarcode(barcode);
+            this.currentMaintenance = maintenance;
+            this.customerCarId = maintenance.getCustomerCar().getId();
+            this.selectedMaintenanceOptions = maintenance.getMaintenanceOptions().stream().mapToLong(MaintenanceOption::getId).toArray();
+            return "/maintenance/maintenancedetails?faces-redirect=true";
+        } catch (Exception ex){
+            errorMessage = ex.getMessage();
+            return "/maintenance/findmaintenance?faces-redirect=true";
+        }
+    }
+
+    private void cleanClass(){
+        this.currentMaintenance = new Maintenance();
+        this.customerCarId = 0;
+        this.selectedMaintenanceOptions = new long[0];
+        this.barcode = "";
+        this.errorMessage = "";
     }
 }
 

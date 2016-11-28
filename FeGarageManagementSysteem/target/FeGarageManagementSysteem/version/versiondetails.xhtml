@@ -14,14 +14,17 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h1>Uitvoering details</h1>
+                                <h1>
+                                    <h:outputText value="Uitvoering wijzigen" rendered="#{versionController.version.id != 0}" />
+                                    <h:outputText value="Uitvoering toevoegen" rendered="#{versionController.version.id == 0}" />
+                                </h1>
                             </div>
 
                             <div class="col-sm-12 col-margin-top-small">
                                 <div class="form-group">
                                     <label for="motor" class="col-sm-4">Motor</label>
                                     <div class="col-sm-8">
-                                        <h:inputText id="motor" styleClass="form-control" value="#{VersionEjb.version.motor}"/>
+                                        <h:inputText id="motor" styleClass="form-control" value="#{versionController.version.motor}"/>
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +33,7 @@
                                 <div class="form-group">
                                     <label for="versionName" class="col-sm-4">Uitvoering</label>
                                     <div class="col-sm-8">
-                                        <h:inputText id="versionName" styleClass="form-control" value="#{VersionEjb.version.versionName}"/>
+                                        <h:inputText id="versionName" styleClass="form-control" value="#{versionController.version.versionName}"/>
                                     </div>
                                 </div>
                             </div>
@@ -39,8 +42,8 @@
                                 <div class="form-group">
                                     <label for="Model" class="col-sm-4">Model</label>
                                         <div class="col-sm-8">
-                                            <h:selectOneMenu value="#{VersionEjb.modelId}" styleClass="form-control" id="Model">
-                                                <f:selectItems value="#{VersionEjb.models}" var="model" itemValue="#{model.id}" itemLabel="#{model.brand.brandName.concat(' ').concat(model.modelName)}"/>
+                                            <h:selectOneMenu value="#{versionController.modelId}" styleClass="form-control" id="Model">
+                                                <f:selectItems value="#{versionController.models}" var="model" itemValue="#{model.id}" itemLabel="#{model.brand.brandName.concat(' ').concat(model.modelName)}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -49,7 +52,7 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <h:commandButton type="submit"  value="Save" action="#{VersionEjb.save()}" styleClass="btn btn-success"/>
+                                    <h:commandButton type="submit"  value="Save" action="#{versionController.save()}" styleClass="btn btn-success"/>
                                 </div>
                             </div>
                         </div>

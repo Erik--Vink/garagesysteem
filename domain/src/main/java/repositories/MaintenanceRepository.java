@@ -41,6 +41,14 @@ public class MaintenanceRepository {
         return requestedMaintenance;
     }
 
+    public Maintenance getByBarcode(String barcode) throws Exception {
+        try {
+            return (Maintenance) entityManager.createNamedQuery("findMaintenanceByBarcode").setParameter("barcode", barcode).getSingleResult();
+        } catch (Exception ex){
+            throw new Exception("Could not find maintenances with barcode: " + barcode);
+        }
+    }
+
     public List<Maintenance> getAll() throws Exception {
         try {
             return (List<Maintenance>) entityManager.createNamedQuery("findAllMaintenances").getResultList();
