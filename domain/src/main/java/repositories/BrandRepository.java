@@ -1,7 +1,7 @@
 package repositories;
 
 import domain.Brand;
-import interceptor.MyInterceptorBinding;
+import interceptor.ErrorLoggingInterceptorBinding;
 
 import javax.ejb.EJBException;
 import javax.ejb.Stateless;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by dewi on 22.11.16.
  */
 @Stateless
-@MyInterceptorBinding
+@ErrorLoggingInterceptorBinding
 public class BrandRepository {
 
     @PersistenceContext

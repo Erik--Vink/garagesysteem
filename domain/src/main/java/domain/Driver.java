@@ -1,6 +1,6 @@
 package domain;
 
-import interceptor.MyInterceptorBinding;
+import interceptor.ErrorLoggingInterceptorBinding;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "findAllDrivers", query = "SELECT e FROM Driver e")
 })
-@MyInterceptorBinding
+@ErrorLoggingInterceptorBinding
 public class Driver {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

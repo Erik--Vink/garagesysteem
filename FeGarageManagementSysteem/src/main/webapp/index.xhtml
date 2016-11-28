@@ -36,8 +36,8 @@
                                <ul class="menu-item-links">
                                    <li><h:commandLink value="Klanten" action="#{customerController.prepareList}"/></li>
                                    <li><h:commandLink value="Nieuwe klant" action="#{customerController.prepareCreate}"/></li>
-                                   <li><a href="#">Auto's van klanten</a></li>
-                                   <li><a href="customercar/customercardetails.xhtml">Klantauto toevoegen</a></li>
+                                   <li><h:commandLink value="Auto's van klanten" action="#{customerCarController.prepareList}"/></li>
+                                   <li><h:commandLink value="Klantauto toevoegen" action="#{customerCarController.prepareCreate}"/></li>
                                    <li><a href="#">Bestuurders</a></li>
                                    <li><a href="driver/driverdetails.xhtml">Bestuurder toevoegen</a></li>
                                </ul>

@@ -2,7 +2,7 @@ package managedBeans;
 
 import domain.Customer;
 import domain.CustomerType;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.CustomerRepository;
 
 import javax.ejb.EJB;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Named(value = "customerController")
 @Stateless
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class CustomerController {
 
     private Customer currentCustomer;

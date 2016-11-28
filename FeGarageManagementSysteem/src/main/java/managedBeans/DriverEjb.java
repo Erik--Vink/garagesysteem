@@ -1,7 +1,7 @@
 package managedBeans;
 
 import domain.Driver;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.DriverRepository;
 
 import javax.ejb.EJB;
@@ -14,7 +14,7 @@ import javax.interceptor.Interceptors;
  */
 @Stateless
 @Named("DriverEjb")
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class DriverEjb {
     private Driver driver;
 

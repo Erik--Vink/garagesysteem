@@ -65,7 +65,8 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h:commandButton type="submit"  value="Save" action="#{customerCarController.save()}" styleClass="btn btn-success"/>
+                                <h:commandLink value="Annuleren" action="#{customerCarController.prepareList}" styleClass="btn btn-default"/>
+                                <h:commandButton type="submit"  value="Opslaan" action="#{customerCarController.save()}" styleClass="btn btn-success"/>
                             </div>
                         </div>
                     </div>

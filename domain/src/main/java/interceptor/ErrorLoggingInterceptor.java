@@ -12,17 +12,15 @@ import javax.interceptor.InvocationContext;
  * Created by dewi on 24.11.16.
  */
 @Interceptor
-@MyInterceptorBinding
-public class TestInterceptor {
+@ErrorLoggingInterceptorBinding
+public class ErrorLoggingInterceptor {
 
     @EJB
     private DbLoggerRepository dbLoggerRepository;
     private DbLogger dbLogger = new DbLogger();
 
     @AroundInvoke
-    public Object testInterceptor(InvocationContext invocationContext) throws Exception {
-        System.out.println(" Interceptor calling to library method: " + invocationContext.getMethod().getName());
-
+    public Object errorInterceptor(InvocationContext invocationContext) throws Exception {
         Object result = null;
         try {
             result = invocationContext.proceed();

@@ -1,7 +1,7 @@
 package managedBeans;
 
 import domain.Brand;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.BrandRepository;
 
 import javax.ejb.EJB;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Stateless
 @Named("brandController")
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class BrandController {
     private Brand currentBrand;
 
@@ -43,12 +43,10 @@ public class BrandController {
     }
 
     public List<Brand> getBrands() throws Exception {
-
         return brandRepository.getAll();
     }
 
     public String save(){
-
         brandRepository.saveOrUpdate(this.currentBrand);
         this.currentBrand = new Brand();
         return "/brand/brandlist?faces-redirect=true";

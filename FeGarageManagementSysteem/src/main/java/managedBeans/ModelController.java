@@ -2,7 +2,7 @@ package managedBeans;
 
 import domain.Brand;
 import domain.Model;
-import interceptor.TestInterceptor;
+import interceptor.ErrorLoggingInterceptor;
 import repositories.BrandRepository;
 import repositories.ModelRepository;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Stateless
 @Named("modelController")
-@Interceptors(TestInterceptor.class)
+@Interceptors(ErrorLoggingInterceptor.class)
 public class ModelController {
     private Model currentModel;
     private long brandId;
